@@ -57,6 +57,11 @@ def main():
 
         # style target feature
         # compute gram maxtrix of style target
+        if not os.path.isfile(vgg_path):
+            print ("Pretrained vgg net does not exsited " + vgg_path)
+            print ("Plese download pretrained vgg net from http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat")
+            return ;
+
         style_image = tf.placeholder(tf.float32, shape=style_shape, name='style_image')
         vggstyletarget = vgg.net(vgg_path, vgg.preprocess(style_image))
         style_vgg = vgg.get_style_vgg(vggstyletarget, style_image, np.array([style_target]))        
